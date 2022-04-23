@@ -1,13 +1,17 @@
-import React from 'react';
-import StyleButton from './Button.module.scss';
+import React from "react";
+import StyleButton from "./Button.module.scss";
 
-class Button extends React.Component {
+interface IProps {
+    children: React.ReactChild;
+}
+
+class Button extends React.Component<IProps> {
     render() {
         return (
             <button className={StyleButton.botao}>
-                Adicionar
+                {this.props.children}
             </button>
-        )
+        );
     }
 }
 
