@@ -2,6 +2,7 @@ import React from 'react';
 import { ITarefas } from '../../types/tarefas';
 import Button from "../Button";
 import StyleForm from './Form.module.scss';
+import {v4 as uuidv4} from 'uuid';
 
 class Form extends React.Component<{
     setTarefas: React.Dispatch<React.SetStateAction<ITarefas[]>>
@@ -12,7 +13,20 @@ class Form extends React.Component<{
     }
     addTarefa(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
-        this.props.setTarefas(tarefasAntigas => [...tarefasAntigas, {...this.state}]);
+        this.props.setTarefas(tarefasAntigas =>
+        [
+            ...tarefasAntigas,
+            {
+                ...this.state,
+                selecionado: false,
+                completo: false,
+                id: uuidv4()
+            }
+        ]);
+        this.setState({
+            tarefa: "",
+            tempo: "00:00"
+        });
     }
     render() {
         return (
