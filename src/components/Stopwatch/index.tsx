@@ -6,10 +6,11 @@ import Clock from "./Clock";
 import StyleStopwatch from './Stopwatch.module.scss';
 
 interface Props {
-    selecionado: ITarefa | undefined
+    selecionado: ITarefa | undefined,
+    finalizarTarefa: () => void
 }
 
-export default function Stopwatch({selecionado} : Props) {
+export default function Stopwatch({selecionado, finalizarTarefa} : Props) {
     const [tempo, setTempo] = useState<number>(
         tempoParaSegundos(
             String(selecionado?.tempo)
@@ -20,6 +21,15 @@ export default function Stopwatch({selecionado} : Props) {
             setTempo(tempoParaSegundos(selecionado.tempo));
         }
     }, [selecionado]);
+    function regressiva(contador: number = 0) {
+        setTimeout(() => {
+            if (contador > 0) {
+                setTempo(contador - 1);
+                return regressiva(contador - 1);
+            }
+            finalizarTarefa();
+        }, 1000);
+    }
     return (
         <div className={StyleStopwatch.cronometro}>
             <p className={StyleStopwatch.titulo}>
@@ -28,7 +38,7 @@ export default function Stopwatch({selecionado} : Props) {
             <div className={StyleStopwatch.relogioWrapper}>
                 <Clock tempo={tempo} />
             </div>
-            <Button>
+            <Button onClick={() => regressiva(tempo)} >
                 Começar
             </Button>
         </div>
