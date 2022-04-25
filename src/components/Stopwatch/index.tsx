@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { tempoParaSegundos } from "../../common/utils/time";
 import { ITarefa } from "../../types/tarefas";
 import Button from "../Button";
@@ -10,14 +10,23 @@ interface Props {
 }
 
 export default function Stopwatch({selecionado} : Props) {
-    const [tempo, setTempo] = useState<number>();
-    if (selecionado?.tempo) {
-        setTempo(tempoParaSegundos(selecionado.tempo));
-    }
+    const [tempo, setTempo] = useState<number>(
+        tempoParaSegundos(
+            String(selecionado?.tempo)
+        )
+    );
+    useEffect(() => {
+        if (selecionado?.tempo) {
+            setTempo(tempoParaSegundos(selecionado.tempo));
+        }
+    }, [selecionado]);
     return (
         <div className={StyleStopwatch.cronometro}>
             <p className={StyleStopwatch.titulo}>
                 Escolha a tarefa e inicie o cronômetro
+            </p>
+            <p>
+                Tempo: {tempo}
             </p>
             <div className={StyleStopwatch.relogioWrapper}>
                 <Clock />
