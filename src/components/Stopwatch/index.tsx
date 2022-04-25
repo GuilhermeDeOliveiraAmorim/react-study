@@ -25,11 +25,8 @@ export default function Stopwatch({selecionado} : Props) {
             <p className={StyleStopwatch.titulo}>
                 Escolha a tarefa e inicie o cronômetro
             </p>
-            <p>
-                Tempo: {tempo}
-            </p>
             <div className={StyleStopwatch.relogioWrapper}>
-                <Clock />
+                <Clock tempo={tempo} />
             </div>
             <Button>
                 Começar
