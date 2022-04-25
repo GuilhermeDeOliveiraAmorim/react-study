@@ -1,3 +1,4 @@
+import { tempoParaSegundos } from "../../common/utils/date";
 import Button from "../Button";
 import Clock from "./Clock";
 import StyleStopwatch from './Stopwatch.module.scss';
