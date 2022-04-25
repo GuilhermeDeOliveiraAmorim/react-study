@@ -1,11 +1,11 @@
 import React from 'react';
-import { ITarefas } from '../../types/tarefas';
+import { ITarefa } from '../../types/tarefas';
 import Button from "../Button";
 import StyleForm from './Form.module.scss';
 import {v4 as uuidv4} from 'uuid';
 
 class Form extends React.Component<{
-    setTarefas: React.Dispatch<React.SetStateAction<ITarefas[]>>
+    setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>
 }> {
     state = {
         tarefa: "",
