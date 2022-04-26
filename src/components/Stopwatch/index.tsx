@@ -11,16 +11,15 @@ interface Props {
 }
 
 export default function Stopwatch({selecionado, finalizarTarefa} : Props) {
-    const [tempo, setTempo] = useState<number>(
-        tempoParaSegundos(
-            String(selecionado?.tempo)
-        )
-    );
+
+    const [tempo, setTempo] = useState<number>();
+
     useEffect(() => {
         if (selecionado?.tempo) {
             setTempo(tempoParaSegundos(selecionado.tempo));
         }
     }, [selecionado]);
+
     function regressiva(contador: number = 0) {
         setTimeout(() => {
             if (contador > 0) {
@@ -30,6 +29,7 @@ export default function Stopwatch({selecionado, finalizarTarefa} : Props) {
             finalizarTarefa();
         }, 1000);
     }
+    
     return (
         <div className={StyleStopwatch.cronometro}>
             <p className={StyleStopwatch.titulo}>
