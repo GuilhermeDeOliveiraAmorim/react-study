@@ -13,15 +13,11 @@ export default function Item(
         completo,
         id,
         selecionaTarefa
-    }: Props)
-{
-    console.log(
-        {tarefa, tempo, selecionado, completo, id}
-    );
+    }: Props) {
     return (
         <li
-            className={`${StyleItem.item} ${selecionado ? StyleItem.itemSelecionado : ''}`}
-            onClick={() => selecionaTarefa({
+            className={`${StyleItem.item} ${selecionado ? StyleItem.itemSelecionado : ''} ${completo ? StyleItem.itemCompletado : '' }`}
+            onClick={() => !completo && selecionaTarefa({
                     tarefa,
                     tempo,
                     selecionado,
@@ -32,6 +28,7 @@ export default function Item(
         >
             <h3>{tarefa}</h3>
             <span>{tempo}</span>
+            {completo && <span className={StyleItem.concluido} aria-label="Tarefa concluída!"></span>}
         </li>
     )
 }

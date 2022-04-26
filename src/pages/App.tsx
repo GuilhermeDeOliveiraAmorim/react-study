@@ -26,7 +26,7 @@ function App() {
                     return {
                         ...tarefa,
                         selecionado: false,
-                        completado: true
+                        completo: true
                     }
                 }
                 return tarefa;
